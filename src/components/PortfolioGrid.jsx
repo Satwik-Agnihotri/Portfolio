@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from 'framer-motion';
 
+// Import asset images and videos
 import iphoneFrame from "../assets/iphone.png";
 import rec1Video from "../assets/rec1.webm";
 import rec2Video from "../assets/rec2.webm";
+import rec3Video from "../assets/rec3.webm"; // New: Import rec3 video
 
 import perimg1 from "../assets/per1.webp";
 import perimg2 from "../assets/per2.webp";
@@ -17,6 +19,10 @@ import uply1 from "../assets/uply1.webp";
 import uply2 from "../assets/uply2.webp";
 import master1 from "../assets/master1.webp";
 import master2 from "../assets/master2.webp";
+
+// New: Import images for Comic Sketch Task Manager
+import task1 from "../assets/task1.webp";
+import task2 from "../assets/task2.webp";
 
 
 /**
@@ -96,9 +102,9 @@ const GlareHover = ({
     position: "absolute",
     inset: 0,
     background: `linear-gradient(${glareAngle}deg,
-          hsla(0,0%,0%,0) 60%,
-          ${rgba} 70%,
-          hsla(0,0%,0%,0) 100%)`,
+      hsla(0,0%,0%,0) 60%,
+      ${rgba} 70%,
+      hsla(0,0%,0%,0) 100%)`,
     backgroundSize: `${glareSize}% ${glareSize}%, 100% 100%`,
     backgroundRepeat: "no-repeat",
     backgroundPosition: "-100% -100%, 0 0",
@@ -174,10 +180,37 @@ const LazyImage = ({ src, alt, className = "", delay = 0, style = {} }) => {
 
 
 const PortfolioGrid = () => {
+  // State to manage which video is currently displayed in the iPhone frame
   const [currentIphoneContent, setCurrentIphoneContent] = useState('rec1');
+  // State to control the initial animation of the product design button
   const [animateButton, setAnimateButton] = useState(false);
+  // State to control the looping animation of the product design button
   const [loopButtonAnimation, setLoopButtonAnimation] = useState(false);
 
+  // Define the sequence of iPhone videos
+  const iphoneVideoSequence = ['rec1', 'rec2', 'rec3']; // Added rec3
+  const [iphoneVideoIndex, setIphoneVideoIndex] = useState(0);
+
+  // Effect to handle the iPhone video cycling
+  useEffect(() => {
+    setCurrentIphoneContent(iphoneVideoSequence[iphoneVideoIndex]);
+  }, [iphoneVideoIndex]);
+
+  // Function to get the video source based on the current content key
+  const getIphoneVideoSrc = (key) => {
+    switch (key) {
+      case 'rec1':
+        return rec1Video;
+      case 'rec2':
+        return rec2Video;
+      case 'rec3': // New case for rec3
+        return rec3Video;
+      default:
+        return rec1Video;
+    }
+  };
+
+  // Effect for the button animation
   useEffect(() => {
     setAnimateButton(true);
     const loopDelayTimeout = setTimeout(() => {
@@ -233,14 +266,16 @@ const PortfolioGrid = () => {
               >
                 <video
                   key={currentIphoneContent}
-                  src={currentIphoneContent === 'rec1' ? rec1Video : rec2Video}
+                  src={getIphoneVideoSrc(currentIphoneContent)} // Use helper function
                   className="absolute top-0 left-0 w-full h-full object-fill"
                   autoPlay
                   muted
                   playsInline
-                  onEnded={() =>
-                    setCurrentIphoneContent((prev) => (prev === 'rec1' ? 'rec2' : 'rec1'))
-                  }
+                  onEnded={() => {
+                    setIphoneVideoIndex((prevIndex) =>
+                      (prevIndex + 1) % iphoneVideoSequence.length
+                    );
+                  }}
                 />
               </div>
             </div>
@@ -441,11 +476,60 @@ const PortfolioGrid = () => {
             </motion.button>
           </div>
 
+          {/* Comic Sketch Task Manager Project - NEW SECTION */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.6 }} // Adjusted delay
+            viewport={{ once: true, amount: 0.2 }}
+            className="bg-[#1B1B1B] rounded-xl border border-[#2a2a2a] p-6 flex flex-col justify-between"
+          >
+            <div className="flex items-center gap-4 bg-[#1B1B1B] mb-4">
+              {/* Wrapped heading and paragraph in a clickable anchor */}
+              <a href="https://checksy-task.netlify.app/" target="_blank" rel="noopener noreferrer" className="max-w-[calc(100%-40px)] flex-grow group">
+                <h3 className="text-lg text-gray-300 font-medium bg-[#1B1B1B] group-hover:text-orange-500 transition-colors duration-300">Comic Sketch Task Manager</h3>
+                <p className="text-sm text-gray-500 bg-[#1B1B1B]">A playful and intuitive task management application with a comic book aesthetic.</p>
+              </a>
+              {/* Existing arrow icon remains clickable */}
+              <a href="https://checksy-task.netlify.app/" target="_blank" rel="noopener noreferrer" className="flex-shrink-0 text-orange-500 hover:text-white transition-colors duration-300 ml-auto bg-[#1B1B1B]">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                  strokeWidth={2} stroke="currentColor" className="w-5 h-5 bg-[#1B1B1B]">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15M19.5 4.5H8.25M19.5 4.5v11.25"/>
+                </svg>
+              </a>
+            </div>
+            {/* Wrapped image section in a clickable anchor */}
+            <a href="https://checksy-task.netlify.app/" target="_blank" rel="noopener noreferrer" className="block">
+              <div className="relative group w-full bg-[#1B1B1B] min-h-[180px] sm:min-h-[220px] flex items-center justify-center overflow-hidden">
+                {/* Back Card */}
+                <LazyImage
+                  src={task2}
+                  alt="Comic Sketch Task Manager - Back Card"
+                  className="absolute w-[90%] h-[90%] object-contain rounded-xl z-0 transform-gpu rotate-[5deg] opacity-70 scale-[0.85]
+                  transition-all duration-500 ease-in-out
+                  group-hover:rotate-[20deg] group-hover:translate-x-[90px] group-hover:translate-y-[-20px] group-hover:scale-[1.15] group-hover:opacity-100 group-hover:z-10 group-hover:shadow-xl
+                  "
+                />
+                {/* Front Card */}
+                <LazyImage
+                  src={task1}
+                  alt="Comic Sketch Task Manager - Front Card"
+                  className="absolute w-full h-full object-contain rounded-xl z-10 transform-gpu
+                  transition-all duration-500 ease-in-out
+                  group-hover:rotate-[-20deg] group-hover:translate-x-[-40px] group-hover:translate-y-[-20px] group-hover:scale-[1.15] group-hover:shadow-xl
+                  "
+                />
+              </div>
+            </a>
+          </motion.div>
+
+
           {/* Scented Pleasure Project */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.6 }}
+            transition={{ duration: 1, delay: 0.7 }} // Adjusted delay
             viewport={{ once: true, amount: 0.2 }}
             className="bg-[#1B1B1B] rounded-xl border border-[#2a2a2a] p-6 flex flex-col justify-between"
           >
@@ -493,7 +577,7 @@ const PortfolioGrid = () => {
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.7 }}
+            transition={{ duration: 1, delay: 0.8 }} // Adjusted delay
             viewport={{ once: true, amount: 0.2 }}
             className="bg-[#1B1B1B] rounded-xl border border-[#2a2a2a] p-6 flex flex-col justify-between"
           >
@@ -541,7 +625,7 @@ const PortfolioGrid = () => {
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.8 }}
+            transition={{ duration: 1, delay: 0.9 }} // Adjusted delay
             viewport={{ once: true, amount: 0.2 }}
             className="bg-[#1B1B1B] rounded-xl border border-[#2a2a2a] p-6 flex flex-col justify-between"
           >
