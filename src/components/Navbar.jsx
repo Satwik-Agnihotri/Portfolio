@@ -12,7 +12,7 @@ const Navbar = ({ onContactClick }) => {
 
   const handleOpenResume = () => {
     window.open(
-      "https://www.dropbox.com/scl/fi/g2yhbr28qa7ta6liqc5cc/Satwik-CV-1.pdf?rlkey=muc2xf6i5j607wm7haz8nxrkv&e=1&st=bjk15si2&dl=0",
+      "https://www.dropbox.com/scl/fi/4qeu6fe8ijwssia5noeg3/Satwik-CV.docx?rlkey=7olgmvdnu7jfo6qmwhfxfj0af&st=80kxy2mb&dl=0",
       "_blank"
     );
   };
