@@ -7,7 +7,7 @@ const Intro = () => {
 
   const handleHireMeClick = () => {
     window.open(
-      "https://www.dropbox.com/scl/fi/g2yhbr28qa7ta6liqc5cc/Satwik-CV-1.pdf?rlkey=muc2xf6i5j607wm7haz8nxrkv&e=1&st=bjk15si2&dl=0",
+      "https://www.dropbox.com/scl/fi/8inmff15wesibxj6suy0t/Satwik-CV.docx?rlkey=cgxngabbx8c45fik9cizbi6ua&st=4hsco5c2&dl=0",
       "_blank"
     );
   };

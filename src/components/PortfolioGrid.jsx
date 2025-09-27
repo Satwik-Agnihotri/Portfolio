@@ -6,6 +6,7 @@ import iphoneFrame from "../assets/iphone.png";
 import rec1Video from "../assets/rec1.webm";
 import rec2Video from "../assets/rec2.webm";
 import rec3Video from "../assets/rec3.webm"; // New: Import rec3 video
+import rec4Video from "../assets/rec4.mp4"; // New: Import rec3 video
 
 import perimg1 from "../assets/per1.webp";
 import perimg2 from "../assets/per2.webp";
@@ -19,6 +20,10 @@ import uply1 from "../assets/uply1.webp";
 import uply2 from "../assets/uply2.webp";
 import master1 from "../assets/master1.webp";
 import master2 from "../assets/master2.webp";
+import nova1 from "../assets/nova1.png";
+import nova2 from "../assets/nova2.png";
+import moon1 from "../assets/moon1.png";
+import moon2 from "../assets/moon2.png";
 
 // New: Import images for Comic Sketch Task Manager
 import task1 from "../assets/task1.webp";
@@ -188,7 +193,7 @@ const PortfolioGrid = () => {
   const [loopButtonAnimation, setLoopButtonAnimation] = useState(false);
 
   // Define the sequence of iPhone videos
-  const iphoneVideoSequence = ['rec1', 'rec2', 'rec3']; // Added rec3
+  const iphoneVideoSequence = ['rec4', 'rec3', 'rec1','rec2']; // Added rec3
   const [iphoneVideoIndex, setIphoneVideoIndex] = useState(0);
 
   // Effect to handle the iPhone video cycling
@@ -205,6 +210,8 @@ const PortfolioGrid = () => {
         return rec2Video;
       case 'rec3': // New case for rec3
         return rec3Video;
+        case 'rec4': // New case for rec3
+        return rec4Video;
       default:
         return rec1Video;
     }
@@ -373,10 +380,60 @@ const PortfolioGrid = () => {
                   group-hover:rotate-[-20deg] group-hover:translate-x-[-40px] group-hover:translate-y-[-20px] group-hover:scale-[1.15] group-hover:shadow-xl
                   "
                 />
+                
               </div>
             </a>
           </motion.div>
-
+   <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.3 }}
+            viewport={{ once: true, amount: 0.2 }}
+            className="bg-[#1B1B1B] rounded-xl border border-[#2a2a2a] p-6 flex flex-col justify-between"
+        >
+            <div className="flex items-center gap-4 bg-[#1B1B1B] mb-4">
+                <a href="#" className="max-w-[calc(100%-40px)] flex-grow group">
+                    <h3 className="text-lg text-gray-300 font-medium bg-[#1B1B1B] group-hover:text-orange-500 transition-colors duration-300">NovaSync – Universal AI Collaboration Protocol</h3>
+                    <p className="text-sm text-gray-500 bg-[#1B1B1B]">Built a decentralized protocol enabling AI agents to collaborate in real time with blockchain-secured trust; scaled to millions of concurrent interactions.</p>
+                </a>
+                <a href="#" className="flex-shrink-0 text-orange-500 hover:text-white transition-colors duration-300 ml-auto bg-[#1B1B1B]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 bg-[#1B1B1B]">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15M19.5 4.5H8.25M19.5 4.5v11.25"/>
+                    </svg>
+                </a>
+            </div>
+            <a href="#" className="block">
+                <div className="relative group w-full bg-[#1B1B1B] min-h-[180px] sm:min-h-[220px] flex items-center justify-center overflow-hidden">
+                    <LazyImage src={nova2} alt="NovaSync - Back Card" className="absolute w-[90%] h-[90%] object-contain rounded-xl z-0 transform-gpu rotate-[5deg] opacity-70 scale-[0.85] transition-all duration-500 ease-in-out group-hover:rotate-[20deg] group-hover:translate-x-[90px] group-hover:translate-y-[-20px] group-hover:scale-[1.15] group-hover:opacity-100 group-hover:z-10 group-hover:shadow-xl"/>
+                    <LazyImage src={nova1} alt="NovaSync - Front Card" className="absolute w-full h-full object-contain rounded-xl z-10 transform-gpu transition-all duration-500 ease-in-out group-hover:rotate-[-20deg] group-hover:translate-x-[-40px] group-hover:translate-y-[-20px] group-hover:scale-[1.15] group-hover:shadow-xl"/>
+                </div>
+            </a>
+        </motion.div>
+         <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.4 }}
+            viewport={{ once: true, amount: 0.2 }}
+            className="bg-[#1B1B1B] rounded-xl border border-[#2a2a2a] p-6 flex flex-col justify-between"
+        >
+            <div className="flex items-center gap-4 bg-[#1B1B1B] mb-4">
+                <a href="#" className="max-w-[calc(100%-40px)] flex-grow group">
+                    <h3 className="text-lg text-gray-300 font-medium bg-[#1B1B1B] group-hover:text-orange-500 transition-colors duration-300">Moonrow (ICP Work) – Decentralized Freelance Marketplace</h3>
+                    <p className="text-sm text-gray-500 bg-[#1B1B1B]">Developed a Web3 freelance platform on ICP with trustless escrow, on-chain reputation, and DAO governance, cutting infra costs by 70%.</p>
+                </a>
+                <a href="#" className="flex-shrink-0 text-orange-500 hover:text-white transition-colors duration-300 ml-auto bg-[#1B1B1B]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 bg-[#1B1B1B]">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15M19.5 4.5H8.25M19.5 4.5v11.25"/>
+                    </svg>
+                </a>
+            </div>
+            <a href="#" className="block">
+                <div className="relative group w-full bg-[#1B1B1B] min-h-[180px] sm:min-h-[220px] flex items-center justify-center overflow-hidden">
+                    <LazyImage src={moon2} alt="Moonrow - Back Card" className="absolute w-[90%] h-[90%] object-contain rounded-xl z-0 transform-gpu rotate-[5deg] opacity-70 scale-[0.85] transition-all duration-500 ease-in-out group-hover:rotate-[20deg] group-hover:translate-x-[90px] group-hover:translate-y-[-20px] group-hover:scale-[1.15] group-hover:opacity-100 group-hover:z-10 group-hover:shadow-xl"/>
+                    <LazyImage src={moon1} alt="Moonrow - Front Card" className="absolute w-full h-full object-contain rounded-xl z-10 transform-gpu transition-all duration-500 ease-in-out group-hover:rotate-[-20deg] group-hover:translate-x-[-40px] group-hover:translate-y-[-20px] group-hover:scale-[1.15] group-hover:shadow-xl"/>
+                </div>
+            </a>
+        </motion.div>
         </div>
 
         {/* Right Column */}
